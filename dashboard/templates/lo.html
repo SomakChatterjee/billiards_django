@@ -1,0 +1,112 @@
+{% extends 'inner.html' %}
+{% load static %}
+
+
+{% block content %}
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 class="m-0 text-dark">Dashboard</h1>
+          </div><!-- /.col -->
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item active">{{ title }}</li>
+            </ol>
+          </div><!-- /.col -->
+        </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <!-- Info boxes -->
+        <div class="row">
+
+					<div class="col-md-3 offset-md-3 col-sm-6 col-xs-12 dashBox">
+						<!-- Widget: user widget style 1 -->
+						<div class="card card-widget widget-user">
+						  <!-- Add the bg color to the header using any of the bg-* classes -->
+						  <div class="widget-user-header bg-info-active">
+							<h3 class="widget-user-username">PROFILE</h3>
+						  </div>
+						  <div class="widget-user-image">
+							<img class="img-circle elevation-2" src="http://billiards.ecominnnovations.com/images/dash1.png" alt="User Avatar">
+						  </div>
+						  <div class="card-footer">
+							<ul class="nav flex-column">
+							  <li class="nav-item">
+								<a href="/profile/lo" class="nav-link">
+								  Edit Profile
+								</a>
+							  </li>
+							  <li class="nav-item">
+								<a href="/auth/password_change/" class="nav-link">
+								  Change My Password
+								</a>
+							  </li>
+							</ul>
+							<!-- /.row -->
+						  </div>
+						</div>
+						<!-- /.widget-user -->
+					  </div>
+
+
+					  <div class="col-md-3 col-sm-6 col-xs-12 dashBox">
+						<!-- Widget: user widget style 1 -->
+						<div class="card card-widget widget-user">
+						  <!-- Add the bg color to the header using any of the bg-* classes -->
+						  <div class="widget-user-header bg-info-active">
+							<h3 class="widget-user-username">LEAGUES</h3>
+						  </div>
+						  <div class="widget-user-image">
+							<img class="img-circle elevation-2" src="http://billiards.ecominnnovations.com/images/dash2.png" alt="User Avatar">
+						  </div>
+						  <div class="card-footer">
+							<ul class="nav flex-column">
+							  <li class="nav-item">
+								<a href="/league" class="nav-link">
+								  Leagues Info
+								</a>
+							  </li>
+
+							  <li class="nav-item">
+								<a href="/league/create" class="nav-link">
+								  Create  Leagues
+								</a>
+							  </li>
+
+							</ul>
+							<!-- /.row -->
+						  </div>
+						</div>
+						<!-- /.widget-user -->
+					  </div>
+
+
+
+
+
+
+
+        </div>
+        <!-- /.row -->
+      </div><!--/. container-fluid -->
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+
+  <!-- Control Sidebar -->
+
+  <!-- /.control-sidebar -->
+
+  <!-- Main Footer -->
+{% endblock content %}

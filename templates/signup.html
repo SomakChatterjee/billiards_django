@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block content %}
+  <div class="card">
+    <div class="login-box-body">
+      <h2 class="text-center">Sign Up</h2>
+
+
+    <form method="post" enctype="multipart/form-data">{% csrf_token %}
+
+    {{ form.as_p }}
+    <div class="form-group text-center">
+       <button type="submit" class="btn btn-success btn-flat">Sign Up</button>
+    </div>
+     <div class="form-group text-center">
+        <h4>Already have an account? <a href="/auth/login">Login Here</a></h4>
+   </div>
+  </form>
+    </div>
+    <!-- /.login-card-body -->
+  </div>
+{% endblock content %}
+{% block footer_javascript_base %}
+
+<script type="text/javascript">
+  $(function () {
+    $("#id_username").addClass("form-control");
+    $("#id_password1").addClass("form-control");
+    $("#id_password2").addClass("form-control");
+    $("#id_user_type").addClass("form-control");
+
+
+
+  });
+  </script>
+{% endblock footer_javascript_base %}

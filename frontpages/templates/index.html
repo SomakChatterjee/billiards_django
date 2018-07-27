@@ -1,0 +1,164 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Billiards | Home</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="{% static 'dist/css/adminlte.min.css' %}">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body class="landing-page">
+
+
+      <div id="blCarousel" class="carousel slide" data-ride="carousel">
+        <!-- Indicators -->
+        <ol class="carousel-indicators">
+          <li data-target="#blCarousel" data-slide-to="0" class="active"></li>
+          <li data-target="#blCarousel" data-slide-to="1"></li>
+          <li data-target="#blCarousel" data-slide-to="2"></li>
+        </ol>
+
+        <!-- Wrapper for slides -->
+        <div class="carousel-inner">
+          <div class="item active">
+            <div class="slider-caption">
+              <h1>BILLIARD WORLD TOURNAMENTS</h1>
+              <h4>The game for everyone</h4>
+              <a href="auth/signup">Join Club</a>
+            </div>
+           <img src="{% static 'images/slider-1.jpg' %}" alt="slider" style="width:100%;">
+          </div>
+
+          <div class="item">
+            <div class="slider-caption">
+              <h1>TAKE A BRAKE AND HAVE A REST</h1>
+              <h4>The game for everyone</h4>
+              <a href="auth/signup">Join Club</a>
+            </div>
+            <img src="{% static 'images/slider-2.jpg' %}" alt="slider" style="width:100%;">
+          </div>
+
+          <div class="item">
+            <div class="slider-caption">
+              <h1>COME AND JOIN</h1>
+              <h4>The game for everyone</h4>
+              <a href="auth/signup">Join Club</a>
+            </div>
+            <img src="{% static 'images/slider-3.jpg' %}" alt="slider" style="width:100%;">
+          </div>
+        </div>
+
+        <!-- Left and right controls -->
+        <a class="left carousel-control" href="#blCarousel" data-slide="prev">
+          <span class="glyphicon glyphicon-chevron-left"></span>
+          <span class="sr-only">Previous</span>
+        </a>
+        <a class="right carousel-control" href="#blCarousel" data-slide="next">
+          <span class="glyphicon glyphicon-chevron-right"></span>
+          <span class="sr-only">Next</span>
+        </a>
+
+      </div>
+
+      <div class="logo-wrap">
+        <div class="container">
+              <div class="logo">
+                <a href="/"><img src="{% static 'dist/img/new-logo.png' %}"/></a>
+              </div>
+            <nav class="main-header navbar navbar-expand navbar-light  pull-right">
+                  <ul class="navbar-nav">
+                      {% if user.is_authenticated %}
+
+                        <li class="nav-item d-none d-sm-inline-block">
+                          <a href="auth/signup" class="nav-link"> Welcome, {{ user.get_username }}</a>
+                        </li>
+						<li class="nav-item d-none d-sm-inline-block">
+						 
+							{% if user.profile.user_type == 'player' %} 
+								<a href="/dashboard/player" class="nav-link"><i class="fa fa-tachometer"></i> Dashboard</a>
+							{% else %} 
+								<a href="/dashboard/lo" class="nav-link"><i class="fa fa-tachometer"></i> Dashboard</a>
+							{% endif %}
+						</li>
+                      <li class="nav-item d-none d-sm-inline-block">
+                          <a href="auth/logout" class="nav-link">Logout</a>
+                        </li>
+
+
+                      {% else %} 
+
+
+                        <li class="nav-item d-none d-sm-inline-block">
+                          <a href="auth/signup" class="nav-link">Register</a>
+                        </li>
+                        <li class="nav-item d-none d-sm-inline-block">
+                          <a href="auth/login" class="nav-link">Login</a>
+                        </li>
+                      {% endif %}
+                  </ul>
+            </nav>
+         </div>
+      </div>
+
+      <section class="content">
+         <h3 class="container">
+              <div class="col-md-8">
+                <h1 class="section-title">ABOUT US</h1>
+					<div class="box-body" >
+					<p>The Billiard Academy League is a web based application that allows League Operators to efficiently execute leagues. The application allows the registration of players who can be easily included into your league at the click of a mouse. It also tracks the players handicaps with a proven algorithm to all players. In addition, it provides players with reports about their previous matches and information on upcoming leagues.</p>
+					<p>For League Operators, it's a complete system for executing an in-house league or in conjunction with other local or non-local Operators. The system provides, scheduling, handicaps, reports, and player registration. It also provides access to a database that includes all the registered players.</p>
+				  </div>
+			  </div>
+            <div class="col-md-4">
+                <h1 class="section-title">UPCOMING LEAGUE</h1>
+                
+                    <div class="box box-primary home-container">
+						
+            <!-- /.box-header -->
+			<div class="marquee">
+              <ul class=" product-list-in-box products-list">
+			   {% if matches %}
+					{% for match in matches %}
+					 <li class="item-{{ forloop.counter }}">
+						<p><a href="javascript:void(0)" class="product-title">{{ match.leaguename }}</a></p>
+						<strong>{{ match.p1_fname }} {{ match.p1_lname }}</strong> vs <strong>{{ match.p2_fname }} {{ match.p2_lname }}</strong>
+					
+					</li>
+					{% endfor %}
+				{% else %}
+					<li>No Matches</li>
+                {% endif %}
+				
+                
+			</ul>
+			</div>
+          
+					
+          </div>
+            </div>
+         </div>
+      </section>
+
+<footer class="footer text-center">
+        <p>© 2018-2019 BIlliards, Inc.</p>
+</footer>
+
+</body>
+</html>
+
+
+
+{% block footer_javascript %}
+
+<script type="text/javascript">
+  $( document ).ready(){ $('#blCarousel').carousel({
+      interval: 3000,
+      cycle: true
+    });
+  });
+  </script>
+{% endblock footer_javascript %}

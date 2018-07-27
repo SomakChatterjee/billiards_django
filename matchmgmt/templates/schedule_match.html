@@ -1,0 +1,130 @@
+{% extends 'inner.html' %}
+{% load static %}
+
+
+{% block content %}
+
+<!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 class="m-0 text-dark">{{ title }}</h1>
+          </div><!-- /.col -->
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="/dashboard/lo">Home</a></li>
+              <li class="breadcrumb-item active">{{ breadcamp }}</li>
+            </ol>
+          </div><!-- /.col -->
+        </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+         <div class="col-md-6 offset-md-3 col-sm-10 offset-sm-1">
+             {% if messages %}
+                            <div class="messages">
+                                {% for msg in messages %}
+
+                                    <div class="alert alert-{{msg.level_tag}}" role="alert">
+                                    {{msg.message}}
+                                    </div>
+
+                                {% endfor %}
+                            </div>
+                      {% endif %}
+
+              <form action="" method="post">
+                  {{errors}}
+                  {% csrf_token %}
+
+                <div class="card">
+                    <div class="card-header">
+                      <h3 class="card-title"><i class="fa fa-object-ungroup"></i> Schedule Match</h3>
+                    </div>
+                    <div class="card-body">
+
+                    <input type="hidden" name="participant1_score" value="0">
+                        <input type="hidden" name="participant2_score" value="0">
+
+                        <input type="hidden" name="leagueid" value="{{ league_id }}">
+                      <div class="row form-group">
+                            <label class="col-4 text-center">Player 1</label>
+                            <div class="col-8">
+
+                              <select id ="particiapant1_id" name="particiapant1_id" class="form-control" required>
+                                  <option value="" selected>Select Player</option>
+                                  {% for player in players %}
+                                    <option value="{{ player.player_id.id }}">{{ player.player_id.first_name }} {{ player.player_id.last_name }} ---{{ player.player_id }}</option>
+                                  {% endfor %}
+                              </select>
+                            </div>
+                      </div>
+                      <div class="row form-group">
+                            <label class="col-4 text-center">Player 2</label>
+                            <div class="col-8">
+                              <select id ="particiapant2_id" name="particiapant2_id" class="form-control" required >
+                                   <option value="" selected>Select Player</option>
+                                  {% for player in players %}
+                                    <option value="{{ player.player_id.id }}">{{ player.player_id.first_name }} {{ player.player_id.last_name }} ---{{ player.player_id }}</option>
+                                  {% endfor %}
+                              </select>
+                            </div>
+                      </div>
+                    </div>
+                    <!-- /.card-body -->
+                  <div class="card-footer text-right">
+                      <input type="submit" class="btn btn-success" value="Schedule Match" />
+                  </div>
+                  <!-- /.card-footer -->
+                  </div>
+              </form>
+        </div>
+      </div><!--/. container-fluid -->
+    </section>
+    <!-- /.content -->
+      </div><!--/. container-fluid -->
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+
+  <!-- Control Sidebar -->
+
+  <!-- /.control-sidebar -->
+
+  <!-- Main Footer -->
+{% endblock content %}
+
+{% block footer_javascript %}
+
+<script type="text/javascript">
+  $(function () {
+
+    $( "#particiapant1_id" ).on('change', function() {
+
+        if( $(this).val()== $( "#particiapant2_id" ).val()) {
+            $(this).val('');
+
+        }
+      });
+      $( "#particiapant2_id" ).on('change', function() {
+
+        if( $(this).val()== $( "#particiapant1_id" ).val()) {
+            $(this).val('');
+
+        }
+      });
+  });
+  </script>
+{% endblock footer_javascript %}

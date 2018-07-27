@@ -1,0 +1,113 @@
+{% extends 'inner.html' %}
+{% load static %}
+
+
+{% block content %}
+
+<!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 class="m-0 text-dark">{{ title }}</h1>
+          </div><!-- /.col -->
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="/dashboard/lo">Home</a>
+              <li class="breadcrumb-item active">{{ title }}</li>
+            </ol>
+          </div><!-- /.col -->
+        </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+          {% if messages %}
+            <div class="messages">
+                {% for msg in messages %}
+
+                    <div class="alert alert-{{msg.level_tag}}" role="alert">
+                    {{msg.message}}
+                    </div>
+
+                {% endfor %}
+            </div>
+           {% endif %}
+           
+           <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">League <a href="/league/create" type="button" class="btn btn-success btn-sm pull-right"><i class="fa fa-plus"></i> Add</a></h3>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body">
+              <table id="example1" class="table table-bordered table-striped">
+                <thead>
+                <tr>
+                  <th>League Name</th>
+                  <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% if leagues %}
+                    {% for league in leagues %}
+                        <tr>
+                          <td>{{ league.leaguename }}</td>
+                          <td>
+                              <a href="/league/{{ league.id }}/edit" type="button" class="btn btn-success btn-sm"><i class="fa fa-edit"></i> Edit</a>
+                              <a href="/league/{{ league.id }}/delete" type="button" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i> Delete</a>
+                              <a href="/player/{{ league.id }}/players" type="button" class="btn btn-warning btn-sm"><i class="fa fa-play-circle"></i> Player</a>
+                               <a href="/match/{{ league.id }}/match" type="button" class="btn btn-info btn-sm"><i class="fa fa-plus-square-o"></i> Match</a>
+
+                          </td>
+                        </tr>
+                    {% endfor %}
+                {% endif %}
+                </tbody>
+                <tfoot>
+                <tr>
+                  <th>League Name</th>
+                  <th>Action</th>
+                </tr>
+                </tfoot>
+              </table>
+            </div>
+            <!-- /.card-body -->
+          </div>
+          <!-- /.card -->
+      </div><!--/. container-fluid -->
+    </section>
+    <!-- /.content -->
+  </div>
+
+
+  <!-- /.content-wrapper -->
+
+  <!-- Control Sidebar -->
+
+  <!-- /.control-sidebar -->
+
+  <!-- Main Footer -->
+{% endblock content %}
+{% block footer_javascript %}
+
+<script type="text/javascript">
+  $(function () {
+
+    $('#example1').DataTable({
+      "paging": true,
+      "lengthChange": false,
+      "searching": false,
+      "ordering": true,
+      "info": true,
+      "autoWidth": false
+    });
+  });
+  </script>
+{% endblock footer_javascript %}
+

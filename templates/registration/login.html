@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block content %}
+<div class="login-box">
+  <div class="card">
+    <div class="login-box-body">
+      <h2 class="login-box-msg">Login</h2>
+
+      {% if user.is_authenticated %}
+        You are loged in..
+      {% else %}
+
+      <form class="form-group" method="post">{% csrf_token %}
+
+    {{ form.as_p }}
+    <div class="form-group text-right">
+      <button type="submit" class="btn btn-primary btn-block btn-flat">Log In</button>
+   </div>
+   <div class="form-group text-center">
+        <h4> <a href="/auth/password_reset">Forgot Password</a> | <a href="/auth/signup">Register</a></h4>
+   </div>
+
+  </form>
+      {% endif %}
+    </div>
+    <!-- /.login-card-body -->
+  </div>
+ </div>
+{% endblock content %}
+{% block footer_javascript_base %}
+
+<script type="text/javascript">
+  $(function () {
+    $("#id_username").addClass("form-control");
+    $("#id_password1").addClass("form-control");
+    $("#id_password2").addClass("form-control");
+    $("#id_user_type").addClass("form-control");
+
+
+
+  });
+  </script>
+{% endblock footer_javascript_base %}

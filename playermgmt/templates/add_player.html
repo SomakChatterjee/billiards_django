@@ -1,0 +1,135 @@
+{% extends 'inner.html' %}
+{% load static %}
+
+
+{% block content %}
+
+<!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 class="m-0 text-dark">{{ title }}</h1>
+          </div><!-- /.col -->
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="/dashboard/lo">Home</a></li>
+              <li class="breadcrumb-item active">{{ breadcamp }}</li>
+            </ol>
+          </div><!-- /.col -->
+        </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+
+            <div class="col-md-6 offset-md-3">
+                  <div class="card">
+                    <div class="card-header">
+                      <h3 class="card-title">{{ title }}</h3>
+                    </div>
+                      {% if messages %}
+                            <div class="messages">
+                                {% for msg in messages %}
+
+                                    <div class="alert alert-{{msg.level_tag}}" role="alert">
+                                    {{msg.message}}
+                                    </div>
+
+                                {% endfor %}
+                            </div>
+                      {% endif %}
+                                    <!-- /.card-header -->
+                    <form action="/player/{{ leagueid }}/add_player" method="post">{% csrf_token %}
+                      <div class="card-body">
+                      <table id="example2" class="table table-bordered table-striped">
+                        <thead>
+                        <tr>
+                          <th>Action</th>
+                          <th>Player's Name</th>
+                           <th>User</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+
+                    {% if playerdeatils %}
+                        {% for playersdetail in playerdeatils %}
+
+
+                            <tr>
+                              <td><label><input type="checkbox" name = "player_id[]" class="flat-red" value="{{ playersdetail.user.id }}"></label></td>
+                              <input type="hidden" name="leauge_id[]" value="{{leagueid}}">
+                              <td>{{playersdetail.user.first_name }} {{playersdetail.user.last_name }}</td>
+                              <td>
+                                {{ playersdetail.user }}
+
+                              </td>
+                            </tr>
+
+
+                        {% endfor %}
+                      {% else %}
+                         <tr>
+                           <td colspan="3"><center>No Players</center></td>
+                         </tr>
+                      {% endif %}
+
+
+                        </tbody>
+                        <tfoot>
+                        <tr>
+                          <th>Action</th>
+                          <th>Player's Name</th>
+                           <th>User</th>
+                        </tr>
+                        </tfoot>
+                      </table>
+                    </div>
+
+                    <!-- /.card-body -->
+                  </div>
+
+                       {% if playerdeatils %}
+                          <button class="btn btn-primary btn-sm pull-right"><i class="fa fa-plus"></i> Add Player</button>
+                      {% else %}
+                         <a href ="/player/{{ leagueid }}/players" class="btn btn-primary btn-sm pull-right"><i class="fa fa-plus"></i> Back</a>
+
+                      {% endif %}
+                    </form>                  <!-- /.card -->
+             </div>
+
+      </div><!--/. container-fluid -->
+    </section>
+    <!-- /.content -->
+      </div><!--/. container-fluid -->
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+
+  <!-- Control Sidebar -->
+
+  <!-- /.control-sidebar -->
+
+  <!-- Main Footer -->
+{% endblock content %}
+
+{% block footer_javascript %}
+
+<script type="text/javascript">
+  //Flat red color scheme for iCheck
+    $('input[type="checkbox"].flat-red, input[type="radio"].flat-red').iCheck({
+      checkboxClass: 'icheckbox_flat-green',
+      radioClass   : 'iradio_flat-green'
+    })
+  </script>
+{% endblock footer_javascript %}

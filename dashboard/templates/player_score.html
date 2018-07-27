@@ -1,0 +1,84 @@
+{% extends 'player_inner.html' %}
+{% load static %}
+
+
+{% block content_player %}
+
+<!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 class="m-0 text-dark">{{ title }}</h1>
+          </div><!-- /.col -->
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item active">{{ title }}</li>
+            </ol>
+          </div><!-- /.col -->
+        </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+         <div class="col-md-4 offset-md-4 col-sm-8 offset-sm-2">
+              <form action="" method="post" class="form-horizontal">
+                  {% csrf_token %}
+
+                <div class="card">
+                    <div class="card-header">
+                      <h3 class="card-title"><i class="fa fa-trophy"></i> Enter Score</h3>
+                    </div>
+                    {{ errors }}
+                    <div class="card-body">
+					
+                    {% for match in matchdetail %}
+						<div class="col-md-12">
+						  <div class="form-group">
+								<label class="col-md-12 control-label"> {{ match.p1_fname }} {{ match.p1_lname }} ({{match.username1}})   </label>
+								<div class="col-md-12">
+								  <input type="number" name="player1_score" value="" class="form-control" required min=0 max=10 />
+
+								</div>
+						  </div>
+						</div>
+						<div class="col-md-12">
+							<div class="form-group">
+								<label class="col-md-12 control-label">{{ match.p2_fname }} {{ match.p2_lname }} ({{match.username2}})</label>
+								<div class="col-md-12">
+								  <input type="number" name="player2_score" value="" class="form-control" required min=0 max=10 />
+
+								</div>
+							</div>
+						</div>
+                   
+                    {% endfor %}
+					
+					</div>
+                    <!-- /.card-body -->
+                  <div class="card-footer text-right">
+                      <input type="submit" value="Submit" class="btn btn-success" value="Edit Score" />
+                  </div>
+                  <!-- /.card-footer -->
+                  </div>
+              </form>
+        </div>
+      </div><!--/. container-fluid -->
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+
+  <!-- Control Sidebar -->
+
+  <!-- /.control-sidebar -->
+
+  <!-- Main Footer -->
+{% endblock content_player %}

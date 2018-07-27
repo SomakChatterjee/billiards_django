@@ -1,0 +1,115 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+  <title>Billiard | Dashboard</title>
+
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- Bootstrap -->
+  <link rel="stylesheet" href="{% static 'plugins/bootstrap/css/bootstrap.css' %}">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="{% static 'dist/css/adminlte.min.css' %}">
+  <!-- Google Font: Source Sans Pro -->
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+    <!-- DataTables -->
+  <link rel="stylesheet" href="{% static 'plugins/datatables/dataTables.bootstrap4.css' %}">
+    <!-- iCheck for checkboxes and radio inputs -->
+  <link rel="stylesheet" href="{% static 'plugins/iCheck/all.css' %}">
+</head>
+<body class="hold-transition">
+<div class="wrapper">
+  <!-- Navbar -->
+  <nav class="main-header navbar navbar-expand bg-black navbar-light border-bottom">
+    <!-- Left navbar links -->
+    <ul class="navbar-nav">
+      <li class="nav-item d-none d-sm-inline-block">
+        <a href="/" class="nav-link"><img src="{% static 'dist/img/new-logo.png' %}" /></a>
+      </li>
+    </ul>
+
+
+    <!-- Right navbar links -->
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item">
+        <a class="nav-link" href="#">
+
+           {% if user.is_authenticated %} Welcome, {{ user.get_username }}. {% else %} Please log in. {% endif %}
+
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/auth/logout">Log Out</a>
+      </li>
+    </ul>
+  </nav>
+  <!-- /.navbar -->
+
+  <nav class="main-header navbar navbar-expand bg-white navbar-light border-bottom">
+  	<ul class="navbar-nav">
+      <li class="nav-item">
+        <a href="/dashboard/player" class="nav-link"><i class="fa fa-tachometer"></i> Dashboard</a>
+      </li>
+
+
+      <li class="nav-item dropdown">
+        <a class="nav-link" data-toggle="dropdown" href="#"><i class="fa fa-object-ungroup"></i> Matches</a>
+        <div class="dropdown-menu">
+			<a href="/dashboard/player/completed" class="dropdown-item">Completed</a>
+			<a href="/dashboard/player/pending" class="dropdown-item">Pending</a>
+
+		</div>
+      </li>
+
+      <li class="nav-item dropdown">
+       <a class="nav-link" data-toggle="dropdown" href="#"><i class="fa fa-edit"></i> Edit Profile</a>
+        <div class="dropdown-menu">
+			 <a href="/profile/player" class="nav-link"> Edit Profile</a>
+
+			<a href="/auth/password_change/" class="dropdown-item">Change Password</a>
+
+		</div>
+
+      </li>
+
+
+    </ul>
+  </nav>
+
+    {% block content_player %}
+            if you see this, something is wrong!
+    {% endblock content_player %}
+    <footer class="main-footer">
+    <!-- To the right -->
+    <div class="float-right d-sm-none d-md-block">
+      Anything you want
+    </div>
+    <!-- Default to the left -->
+    <strong>Copyright &copy; 2018-2019 <a href="#">Billiards</a>.</strong> All rights reserved.
+  </footer>
+</div>
+<!-- ./wrapper -->
+
+<!-- REQUIRED SCRIPTS -->
+<!-- jQuery -->
+<script src="{% static 'plugins/jquery/jquery.min.js' %}"></script>
+<!-- Bootstrap -->
+<script src="{% static 'plugins/bootstrap/js/bootstrap.bundle.min.js'%}"></script>
+<!-- DataTables -->
+<script src="{% static 'plugins/datatables/jquery.dataTables.js'%}"></script>
+<script src="{% static 'plugins/datatables/dataTables.bootstrap4.js'%}"></script>
+<!-- iCheck 1.0.1 -->
+<script src="{% static 'plugins/iCheck/icheck.min.js'%}"></script>
+<!-- AdminLTE App -->
+<script src="{% static 'dist/js/adminlte.js' %}"></script>
+
+{% block footer_javascript %}
+
+{% endblock footer_javascript %}
+
+</body>
+</html>

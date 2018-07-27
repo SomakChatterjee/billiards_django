@@ -1,0 +1,121 @@
+{% extends 'inner.html' %}
+{% load static %}
+
+
+{% block content %}
+
+<!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 class="m-0 text-dark">Leauge name: {% for titles in title %}{{ titles.leaguename }} {% endfor %}</h1>
+          </div><!-- /.col -->
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="/dashboard/lo">Home</a></li>
+              <li class="breadcrumb-item active">{{ breadcamp }}</li>
+            </ol>
+          </div><!-- /.col -->
+        </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        {% if messages %}
+            <div class="messages">
+                {% for msg in messages %}
+
+                    <div class="alert alert-{{msg.level_tag}}" role="alert">
+                    {{msg.message}}
+                    </div>
+
+                {% endfor %}
+            </div>
+           {% endif %}
+
+        <div class="card card-primary card-outline">
+            <div class="card-header">
+              <h3 class="card-title"> <a href="/player/{{ league_id }}/add_player" class="btn btn-primary btn-sm pull-right"><i class="fa fa-plus"></i> Add Player</a></h3>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body">
+              <table id="example2" class="table table-bordered table-striped">
+                <thead>
+                <tr>
+                  <th>Sl. No.</th>
+                  <th>Player's Name</th>
+                   <th>User</th>
+                  <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for playersdetails in players %}
+
+                {% csrf_token %}
+
+                <tr>
+                  <td>{{ forloop.counter }}</td>
+                  <td>  {{ playersdetails.player_id.first_name }} {{ playersdetails.player_id.last_name }}
+                  </td>
+                   <td>{{ playersdetails.player_id }}</td>
+
+                  <td>
+
+                    <a href="/player/{{ league_id }}/{{ playersdetails.player_id.id }}/remove_player/" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i> Delete</a>
+                  </td>
+                </tr>
+                {% endfor %}
+
+
+                </tbody>
+                <tfoot>
+                <tr>
+                  <th>Sl. No.</th>
+                  <th>Player</th>
+                   <th>User</th>
+                  <th>Actions</th>
+                </tr>
+                </tfoot>
+              </table>
+            </div>
+            <!-- /.card-body -->
+          </div>
+          <!-- /.card -->
+
+      </div><!--/. container-fluid -->
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+
+  <!-- Control Sidebar -->
+
+  <!-- /.control-sidebar -->
+
+  <!-- Main Footer -->
+
+{% endblock content %}
+
+{% block footer_javascript %}
+
+<script type="text/javascript">
+  $(function () {
+
+    $('#example2').DataTable({
+      "paging": true,
+      "lengthChange": false,
+      "searching": false,
+      "ordering": true,
+      "info": true,
+      "autoWidth": false
+    });
+  });
+  </script>
+{% endblock footer_javascript %}

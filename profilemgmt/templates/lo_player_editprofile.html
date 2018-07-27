@@ -1,0 +1,138 @@
+{% extends 'player_inner.html' %}
+{% load static %}
+
+
+{% block content_player %}
+
+
+<!-- Content Wrapper. Contains page content -->
+{{ error }}
+
+  <div class="content-wrapper">
+       <div class="content-header">
+              <div class="container-fluid">
+                <div class="row mb-2">
+                  <div class="col-sm-6">
+                    <h1 class="m-0 text-dark">Profile Info</h1>
+                  </div><!-- /.col -->
+                  <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                      <li class="breadcrumb-item"><a href="/dashboard/{{ user_type }}">Home</a></li>
+                      <li class="breadcrumb-item active">Edit Profile</li>
+                    </ol>
+                  </div><!-- /.col -->
+                </div><!-- /.row -->
+              </div><!-- /.container-fluid -->
+         </div>
+
+       <section class="content">
+              <div class="container-fluid">
+
+              <form class="col-md-8 offset-md-2" method="post" action="" enctype="multipart/form-data">{% csrf_token %}
+                  <div class="card card-primary card-outline">
+                    <div class="card-header">
+                        <div class="user-block">
+                          {% if photo %}
+                                                    <img class="img-circle" src="{% get_media_prefix %}{{ photo}}" alt="User Avatar">
+                                                  {% else %}
+                                                       <img class="img-circle" src="{% get_media_prefix %}noimage.jpg" alt="User Avatar">
+                                                  {% endif %}
+                          <span class="username">{{ username }}</span>
+                          <span class="description">{{ email }}</span>
+                        </div>
+                        <div class="card-tools">
+                          <button type="button" class="btn btn-tool" data-toggle="tooltip" title="Mark as read">
+                            <i class="fa fa-circle-o"></i></button>
+                          <button type="button" class="btn btn-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                          </button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                <!-- Info boxes -->
+
+
+                                        <div class="row">
+
+                                                   <div class="col-md-6">
+                                                        <div class="form-group">
+                                                                <div class="text-center">
+                                                                  <input type ="hidden" value="{{username}}" name="username" >
+                                                                  <input type ="hidden" value="{{email}}" name="email" >
+                                                                   <input type ="hidden" value="{{user_type}}" name="user_type" >
+                                                                  {% if photo %}
+                                                                    <img class="profile-user-img img-fluid img-circle" src="{% get_media_prefix %}{{ photo}}" alt="User Avatar">
+                                                                  {% else %}
+                                                                       <img class="profile-user-img img-fluid img-circle" src="{% get_media_prefix %}noimage.jpg" alt="User Avatar">
+                                                                  {% endif %}
+                                                                    <h3 class="profile-username text-center">{{ username }}</h3>
+                                                                    <p class="text-muted text-center">{{email}}</p>
+                                                                </div><!--
+
+                                                                {% if photo %}
+                                                                   <p>Currently: {{ photo}}</p>
+                                                                   <label for="exampleInputFile">Change:</label>
+                                                                {% else %}
+                                                                   <p>&nbsp;</p>
+                                                                   <label for="exampleInputFile">Change:</label>
+                                                                {% endif %}
+-->
+                                                               <input type="file" name="photo" accept="image/*" id="id_photo">
+
+
+                                                            </div>
+                                                            <div class="form-group">
+
+                                                             <label for="exampleInputEmail1">Address</label>
+                                                              <input type="text" class="form-control" id="exampleInputAddress" placeholder="Address" value="{{ address }}" name="address">
+                                                            </div>
+                                                    </div>
+                                                    <!-- /.col -->
+
+
+                                                    <div class="col-md-6">
+                                                            <input type="hidden" name="profile_id"  value="{{ id }}"  id="id_username" >
+                                                            <input type="hidden" name="userid"  value="{{ user_id}}"  id="id_usernamed" >
+                                                               <div class="form-group">
+
+
+                                                                  <label for="exampleInputEmail1">First Name</label>
+                                                                <input class="form-control input-lg" type="text" placeholder="First name:" name="first_name" value="{{ first_name }}">
+                                                               </div>
+                                                                <div class="form-group">
+                                                             <label for="exampleInputEmail1">Last Name</label>
+                                                            <input class="form-control" type="text" placeholder="Last name" name="last_name" value="{{ last_name }}">
+                                                                </div>
+                                                             <div class="form-group">
+                                                             <label for="exampleInputEmail1">Phone</label>
+                                                            <input type="text" class="form-control" id="exampleInputPhone" placeholder="Phone:" value="{{ phone }}" name="phone">
+                                                             </div>
+                                                               <div class="form-group">
+                                                             <label for="exampleInputEmail1">Role</label>
+                                                                <input class="form-control" type="text" placeholder="User type" value="{{ user_type }}" name="user_type" readonly>
+                                                               </div>
+
+                                                      </div>
+                                                      <!-- /.description-block -->
+                                                    </div>
+
+
+
+
+
+
+                    </div>
+
+                      <div class="card-footer clearfix">
+                         <button type="submit" class="btn bg-maroon btn-flat margin btn-primary pull-right">Edit Profile</button>
+                      </div>
+               </div>
+           </form>
+
+      </div>
+   </section>
+  </div>
+
+
+
+
+{% endblock content_player %}

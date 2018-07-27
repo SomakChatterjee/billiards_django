@@ -1,0 +1,136 @@
+{% extends 'inner.html' %}
+{% load static %}
+
+
+{% block content %}
+
+<!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 class="m-0 text-dark">Matches</h1>
+          </div><!-- /.col -->
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="/dashboard/lo">Home</a></li>
+              <li class="breadcrumb-item active">{{ breadcamp }}</li>
+            </ol>
+          </div><!-- /.col -->
+        </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+         {% if messages %}
+            <div class="messages">
+                {% for msg in messages %}
+
+                    <div class="alert alert-{{msg.level_tag}}" role="alert">
+                    {{msg.message}}
+                    </div>
+
+                {% endfor %}
+            </div>
+           {% endif %}
+
+        <div class="card card-primary card-outline">
+            <div class="card-header">
+              <h3 class="card-title">{{ title }}   <a href ="/match/{{ league_id }}/schedule_match" class="btn btn-primary btn-sm pull-right"><i class="fa fa-plus"></i> Add Match</a></h3>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body">
+              <table id="example2" class="table table-bordered table-striped">
+                <thead>
+                <tr>
+                  <th>Sl. No.</th>
+                  <th>Match Name</th>
+                  <th>Match Status</th>
+                  <th>Match Scores</th>
+                  <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% if matches %}
+
+                    {% for match in matches %}
+
+                        <tr>
+                          <td> {{ forloop.counter }}</td>
+                          <td>{{ match.p1_fname }} {{ match.p1_lname }} V/S  {{ match.p2_fname }} {{ match.p2_lname }} </td>
+
+
+                              {% if match.can_modify == 0 %}
+                                <td>Pending</td>
+                                <td>&nbsp;-- </td>
+                                  <!--<a href="/league/{{ league.id }}/edit" type="button" class="btn btn-success btn-sm"><i class="fa fa-edit"></i> Edit</a>-->
+                                <td> <a href="/match/{{ league_id }}/delete/{{ match.match_id }}" type="button" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i> Delete</a></td>
+
+                            {% else %}
+                                <td>Completed</td>
+                                  <!--<a href="/league/{{ league.id }}/edit" type="button" class="btn btn-success btn-sm"><i class="fa fa-edit"></i> Edit</a>-->
+
+                             <td>&nbsp{{ match.p1_fname }} {{ match.p1_lname }} - {{ match.participant1_score }} <br>
+                                 {{ match.p2_fname }} {{ match.p2_lname }} - {{ match.participant2_score }}</td>
+                            <td>&nbsp;</td>
+                              {% endif %}
+
+                        </tr>
+
+                    {% endfor %}
+                {% endif %}
+
+
+
+                </tbody>
+                <tfoot>
+                <tr>
+                  <th>Sl. No.</th>
+                  <th>Match Name</th>
+                  <th>Match Status</th>
+                  <th>Match Scores</th>
+                  <th>Actions</th>
+                </tr>
+                </tfoot>
+              </table>
+            </div>
+            <!-- /.card-body -->
+          </div>
+          <!-- /.card -->
+
+      </div><!--/. container-fluid -->
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+
+  <!-- Control Sidebar -->
+
+  <!-- /.control-sidebar -->
+
+  <!-- Main Footer -->
+
+{% endblock content %}
+
+{% block footer_javascript %}
+
+<script type="text/javascript">
+  $(function () {
+
+    $('#example2').DataTable({
+      "paging": true,
+      "lengthChange": false,
+      "searching": false,
+      "ordering": true,
+      "info": true,
+      "autoWidth": false
+    });
+  });
+  </script>
+{% endblock footer_javascript %}

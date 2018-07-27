@@ -1,0 +1,112 @@
+{% extends 'inner.html' %}
+{% load static %}
+
+
+{% block content %}
+
+<!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 class="m-0 text-dark">{{ title }}</h1>
+          </div><!-- /.col -->
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item active">{{ title }}</li>
+            </ol>
+          </div><!-- /.col -->
+        </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">{{ title }}</h3>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body">
+              <table id="example3" class="table table-bordered table-striped">
+                <thead>
+                <tr>
+                  <th>Player Name</th>
+                  <th colspan="9"></th>
+                  <th>Score</th>
+                </tr>
+                </thead>
+                <tbody>
+
+                <tr>
+                  <td>Player 1</td>
+                  <td><label><input type="radio" name="match1" class="flat-red" checked></label></td>
+                  <td><label><input type="radio" name="match1" class="flat-red" ></label></td>
+                  <td><label><input type="radio" name="match1" class="flat-red" ></label></td>
+                  <td><label><input type="radio" name="match1" class="flat-red"></label></td>
+                  <td><label><input type="radio" name="match1" class="flat-red" ></label></td>
+                  <td><label><input type="radio" name="match1" class="flat-red" ></label></td>
+                  <td><label><input type="radio" name="match1" class="flat-red" ></label></td>
+                  <td><label><input type="radio" name="match1" class="flat-red" ></label></td>
+                  <td><label><input type="radio" name="match1" class="flat-red" ></label></td>
+                  <td>
+                    <input type="text">
+                  </td>
+                </tr>
+                <tr>
+                  <td>Player 2</td>
+                  <td><label><input type="radio" name="match2" class="flat-red" ></label></td>
+                  <td><label><input type="radio" name="match2" class="flat-red" checked></label></td>
+                  <td><label><input type="radio" name="match2" class="flat-red" ></label></td>
+                  <td><label><input type="radio" name="match2" class="flat-red"></label></td>
+                  <td><label><input type="radio" name="match2" class="flat-red" ></label></td>
+                  <td><label><input type="radio" name="match2" class="flat-red" ></label></td>
+                  <td><label><input type="radio" name="match2" class="flat-red" ></label></td>
+                  <td><label><input type="radio" name="match2" class="flat-red" ></label></td>
+                  <td><label><input type="radio" name="match2" class="flat-red" ></label></td>
+                  <td>
+                    <input type="text">
+                  </td>
+                </tr>
+                </tbody>
+                <tfoot>
+                <tr>
+                  <th>Player Name</th>
+                  <th colspan="9"></th>
+                  <th>Score</th>
+                </tr>
+                </tfoot>
+              </table>
+            </div>
+            <!-- /.card-body -->
+          </div>
+          <!-- /.card -->
+      </div><!--/. container-fluid -->
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+
+  <!-- Control Sidebar -->
+
+  <!-- /.control-sidebar -->
+
+  <!-- Main Footer -->
+{% endblock content %}
+
+{% block footer_javascript %}
+
+<script type="text/javascript">
+  //Flat red color scheme for iCheck
+    $('input[type="checkbox"].flat-red, input[type="radio"].flat-red').iCheck({
+      checkboxClass: 'icheckbox_flat-green',
+      radioClass   : 'iradio_flat-green'
+    })
+  </script>
+{% endblock footer_javascript %}
